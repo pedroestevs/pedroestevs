@@ -60,7 +60,7 @@ Some surveys and missions I've worked with or explored include:
 
 Beyond my main research interests, I enjoy exploring different areas of physics, astronomy, programming, and technology.
 
-I see GitHub as a place to document this process — from scientific analysis and experiments to software projects and new ideas.
+I see GitHub as a place to document this process from scientific analysis and experiments to software projects and new ideas.
 
 ---
 
