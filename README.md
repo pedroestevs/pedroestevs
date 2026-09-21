@@ -82,7 +82,7 @@ Programming is part of my research workflow, from processing astronomical catalo
 ## GitHub activity
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=pedroestevs&amp;bg_color=0d1117&amp;color=c9d1d9&amp;line=7aa2f7&amp;point=c9d1d9&amp;area=true&amp;area_color=161b22&amp;hide_border=true&amp;hide_title=true" alt="Pedro Esteves GitHub activity graph" width="100%">
+  <img src="./profile-summary-card-output/github_dark/0-profile-details.svg" alt="Pedro Esteves GitHub activity summary" width="100%">
 </p>
 
 ## Contributions
