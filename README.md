@@ -1,73 +1,102 @@
-# Hi, I'm Pedro 👋
+<p align="center">
+  <img src="./assets/header.svg" alt="Pedro Esteves, physics, astrophysics and scientific computing" width="100%">
+</p>
 
-I'm a **Physics undergraduate at the Federal University of Santa Catarina (UFSC)**, interested in using programming, data analysis, and computational methods to explore scientific problems.
+# Pedro Esteves
 
-My main academic interests are in **Astrophysics and Exoplanets**, especially the study of stars, stellar variability, photometric data, and large astronomical surveys. I also enjoy exploring new areas of physics, astronomy, and data science.
+Physics undergraduate at the Federal University of Santa Catarina (UFSC)<br>
+Astrophysics, astronomical data and scientific computing
 
-## 🔭 Research & Interests
+## About
 
-* Astrophysics and stellar physics
-* Exoplanets
-* Stellar variability
-* Astronomical surveys and catalogues
-* Scientific data analysis
-* Computational physics
-* Data science and visualization
-* Automation and scientific workflows
+I'm an undergraduate Physics student at the Federal University of Santa Catarina, working with observational astronomy and scientific data analysis.
 
-## 💻 Tools & Technologies
+My main interests are stellar astrophysics and exoplanets, particularly the use of photometric, astrometric and time-series data to investigate stellar systems and other astrophysical phenomena.
 
-**Languages**
+Programming is part of my research workflow, from processing astronomical catalogues to developing reproducible data-analysis pipelines and software tools.
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat\&logo=python\&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat\&logo=postgresql\&logoColor=white)
+## Research
 
-**Scientific & Data Analysis**
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>Astrophysics</strong><br><br>
+      Stellar astrophysics<br>
+      Exoplanets<br>
+      Stellar variability<br>
+      Binary and multiple systems<br>
+      Circumstellar environments
+    </td>
+    <td width="50%" valign="top">
+      <strong>Data and computation</strong><br><br>
+      Astronomical surveys<br>
+      Photometric analysis<br>
+      Time-series analysis<br>
+      Scientific computing<br>
+      Catalogue processing<br>
+      Data visualization
+    </td>
+  </tr>
+</table>
 
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat\&logo=numpy\&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat\&logo=pandas\&logoColor=white)
-![SciPy](https://img.shields.io/badge/SciPy-8CAAE6?style=flat\&logo=scipy\&logoColor=white)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat)
+## Scientific data
 
-**Development**
+`Gaia` &nbsp; `VVV / VVVX` &nbsp; `VIRAC2` &nbsp; `TESS` &nbsp; `Spitzer / GLIMPSE` &nbsp; `DECaPS`
 
-![Git](https://img.shields.io/badge/Git-F05032?style=flat\&logo=git\&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat\&logo=github\&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat\&logo=linux\&logoColor=black)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat\&logo=docker\&logoColor=white)
+## Skills and stack
 
-## 🌌 What I'm currently exploring
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>Scientific computing</strong><br><br>
+      <code>Python</code> <code>NumPy</code> <code>Pandas</code><br>
+      <code>SciPy</code> <code>Astropy</code> <code>Matplotlib</code>
+    </td>
+    <td width="50%" valign="top">
+      <strong>Software development</strong><br><br>
+      <code>FastAPI</code> <code>Next.js</code> <code>React</code><br>
+      <code>Node.js</code> <code>npm</code> <code>REST APIs</code><br>
+      Backend and frontend development
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>Data</strong><br><br>
+      <code>SQL</code> <code>PostgreSQL</code><br>
+      Relational databases
+    </td>
+    <td width="50%" valign="top">
+      <strong>Infrastructure and workflow</strong><br><br>
+      <code>Docker</code> <code>Docker Compose</code><br>
+      <code>Git</code> <code>GitHub</code> <code>Linux</code> <code>WSL</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="top">
+      <strong>Authentication and integrations</strong><br><br>
+      <code>OAuth 2.0</code> <code>JWT</code> <code>API integrations</code>
+    </td>
+  </tr>
+</table>
 
-I'm particularly interested in combining **physics, astronomy, and computation** to work with real observational data and develop reproducible analysis pipelines.
+## GitHub activity
 
-Some of the topics I work with or explore include:
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=pedroestevs&amp;bg_color=0d1117&amp;color=c9d1d9&amp;line=7aa2f7&amp;point=c9d1d9&amp;area=true&amp;area_color=161b22&amp;hide_border=true&amp;hide_title=true" alt="Pedro Esteves GitHub activity graph" width="100%">
+</p>
 
-* Photometric and astrometric data
-* Light curves and time-series analysis
-* Spectral energy distributions
-* Stellar and exoplanet characterization
-* Large astronomical catalogues
-* Cross-matching and processing large datasets
-* Statistical and computational methods in science
+## Contributions
 
-## 🛰️ Astronomical Data
+<p align="center">
+  <img src="./profile-3d-contrib/profile-night-view.svg" alt="Pedro Esteves three-dimensional GitHub contribution calendar" width="100%">
+</p>
 
-Some surveys and missions I've worked with or explored include:
+## Selected work
 
-`Gaia` · `VVV/VVVX` · `VIRAC2` · `TESS` · `Spitzer/GLIMPSE` · `DECaPS`
+My repositories include work in astronomy, scientific computing, data analysis and software development.
 
-## 📚 Always learning
+<!-- Add selected repository cards or a concise project list here. -->
 
-Beyond my main research interests, I enjoy exploring different areas of physics, astronomy, programming, and technology.
+## Contact
 
-I see GitHub as a place to document this process from scientific analysis and experiments to software projects and new ideas.
-
----
-
-### 📫 Connect with me
-
-[![GitHub](https://img.shields.io/badge/GitHub-pedroestevs-181717?style=flat\&logo=github)](https://github.com/pedroestevs)
-
----
-
-> *Exploring the universe, one dataset at a time.* 🔭
+[LinkedIn](https://www.linkedin.com/in/pedro-esteves-14539b234/L) &nbsp; [Email](mailto:estevesp8@gmail.com)
