@@ -63,24 +63,55 @@ def linhas(segs, lw, alphas, cor=TINTA, z=6):
     ax.add_collection(LineCollection(segs, colors=cols, linewidths=lw, capstyle="round", zorder=z))
 
 
+N_TW = 0         # estrelas de 4 pontas recebem id tw0, tw1... para cintilar via CSS
+
+
+def estrela4(x, y, R, cor, alpha, z=3, k=0.26):
+    """Estrela de 4 pontas (lados côncavos), só mancha chapada, sem contorno."""
+    t = np.arange(8) * np.pi/4 - np.pi/2
+    r = np.where(np.arange(8) % 2 == 0, R, k*R)
+    global N_TW
+    ax.add_patch(Polygon(np.c_[x + r*np.cos(t), y + r*np.sin(t)], closed=True,
+                         facecolor=cor, alpha=alpha, edgecolor="none", zorder=z,
+                         gid=f"tw{N_TW}"))
+    N_TW += 1
+
+
 # ---------------------------------------------------------------- moldura e gratícula
 ax.add_patch(FancyBboxPatch((0.6, 0.6), W - 1.2, H - 1.2,
                             boxstyle="round,pad=0,rounding_size=0.8",
                             facecolor=FUNDO, edgecolor=TINTA2, lw=0.5, zorder=0))
-X0 = 70.0                                   # início da área celeste
+X0 = 56.0                                   # onde o céu começa a aparecer
+X1 = 86.0                                   # a partir daqui, densidade plena
+
+
+def fade(x):
+    """Transição suave texto -> céu (smoothstep entre X0 e X1)."""
+    u = np.clip((np.asarray(x) - X0) / (X1 - X0), 0, 1)
+    return u*u*(3 - 2*u)
+
+
+def pontilhar(p, passo=0.85, r=0.075, a=0.45):
+    """Linha de construção como fileira de pontos, que some suavemente à esquerda."""
+    L = np.r_[0, np.cumsum(np.hypot(*np.diff(p, axis=0).T))]
+    q = np.c_[np.interp(np.arange(0, L[-1], passo), L, p[:, 0]),
+              np.interp(np.arange(0, L[-1], passo), L, p[:, 1])]
+    m = (q[:, 0] > X0) & (q[:, 0] < W - 2) & (q[:, 1] > 2) & (q[:, 1] < H - 2)
+    q = q[m]
+    ax.scatter(q[:, 0], q[:, 1], s=(2*r*72/25.4)**2, linewidths=0, zorder=1,
+               c=[to_rgba(TINTA2, a*f) for f in fade(q[:, 0])])
+
+
 gx0, gy0 = 118.0, 150.0                     # polo da gratícula, fora da prancha
 for R in np.arange(112, 160, 12):
-    p = arco(gx0, gy0, R, R, 0, np.deg2rad(-150), np.deg2rad(-30))
-    m = (p[:, 0] > X0) & (p[:, 0] < W - 2) & (p[:, 1] > 2)
-    ax.plot(p[m, 0], p[m, 1], color=TINTA2, lw=0.35, ls=(0, (0.5, 1.5)), alpha=0.45, zorder=1)
+    pontilhar(arco(gx0, gy0, R, R, 0, np.deg2rad(-155), np.deg2rad(-30), 600))
 for ang in np.arange(-130, -45, 12):
     a = np.deg2rad(ang)
-    r = np.linspace(110, 165, 50); p = np.c_[gx0 + r*np.cos(a), gy0 + r*np.sin(a)]
-    m = (p[:, 0] > X0) & (p[:, 0] < W - 2) & (p[:, 1] > 2) & (p[:, 1] < H - 2)
-    ax.plot(p[m, 0], p[m, 1], color=TINTA2, lw=0.35, ls=(0, (0.5, 1.5)), alpha=0.45, zorder=1)
+    r = np.linspace(110, 165, 200)
+    pontilhar(np.c_[gx0 + r*np.cos(a), gy0 + r*np.sin(a)])
 
 # zonas ocupadas pelos objetos (estrelas de fundo não entram nelas)
-OBJ = [(86, 24, 10.5), (120, 32, 12.0), (119, 9, 9.0), (153, 20, 10.5), (146, 41, 5.0)]
+OBJ = [(86, 24, 10.5), (120, 32, 12.0), (126, 11, 2.0), (153, 20, 10.5), (146, 41, 5.0)]
 
 
 def livre(x, y, folga=0.6):
@@ -89,17 +120,17 @@ def livre(x, y, folga=0.6):
 
 # ---------------------------------------------------------------- céu de fundo
 rng = np.random.default_rng(42)
-xs, ys = rng.uniform(X0, W - 3, 420), rng.uniform(2.5, H - 3, 420)
+xs, ys = rng.uniform(X0, W - 3, 520), rng.uniform(2.5, H - 3, 520)
 mag = rng.exponential(1.0, xs.size)
-ok = np.array([livre(x, y) for x, y in zip(xs, ys)])
+# densidade e brilho crescem suavemente da esquerda para a direita
+ok = np.array([livre(x, y) for x, y in zip(xs, ys)]) & (rng.uniform(size=xs.size) < fade(xs)**1.4)
 xs, ys, mag = xs[ok], ys[ok], mag[ok]
-ax.scatter(xs, ys, s=np.clip(0.75 - 0.3*mag, 0.04, 0.75)**2 * 1.3, c=TINTA, linewidths=0,
-           alpha=0.85, zorder=2)
-# poucas estrelas brilhantes: disco com mancha areia + contorno fino
-for (x, y, r) in [(74.5, 7.0, 0.8), (103.0, 6.0, 0.6), (101.5, 42.0, 0.75), (138.5, 23.5, 0.6),
-                  (165.0, 36.0, 0.7), (79.0, 42.5, 0.55)]:
-    ax.add_patch(Circle((x, y), r, facecolor=AREIA, alpha=0.5, edgecolor="none", zorder=3))
-    ax.add_patch(Circle((x, y), r, facecolor="none", edgecolor=TINTA, lw=0.45, zorder=3))
+ax.scatter(xs, ys, s=np.clip(0.75 - 0.3*mag, 0.04, 0.75)**2 * 1.3, linewidths=0, zorder=2,
+           c=[to_rgba(TINTA, 0.85*(0.35 + 0.65*f)) for f in fade(xs)])
+# poucas estrelas brilhantes: estrela de 4 pontas em areia
+for (x, y, r) in [(81.0, 6.5, 0.8), (103.0, 6.0, 0.6), (101.5, 42.0, 0.75), (138.5, 23.5, 0.6),
+                  (165.0, 36.0, 0.7), (84.0, 43.5, 0.55)]:
+    estrela4(x, y, 2.1*r, AREIA, 0.6, z=3)
 
 # ---------------------------------------------------------------- Lua gibosa
 mx, my, mr = 86.0, 24.0, 9.2
@@ -138,7 +169,9 @@ px, py, pr, inc = 120.0, 32.0, 5.0, -16
 k_b = 0.30
 for a_, lw in [(8.6, 0.6), (10.6, 0.6), (9.5, 0.25)]:               # metade de trás
     p = arco(px, py, a_, a_*k_b, inc, np.pi, 2*np.pi)
-    ax.plot(p[:, 0], p[:, 1], color=TINTA, lw=lw, zorder=4)
+    ax.plot(p[:, 0], p[:, 1], color=TINTA, lw=lw, zorder=3)
+# disco opaco: a mancha do planeta é translúcida, então ele precisa tapar o anel de trás
+ax.add_patch(Circle((px, py), pr, facecolor=FUNDO, edgecolor="none", zorder=3.5))
 bp.esfera(ax, px, py, pr, tinta=TINTA, cor=AREIA, alpha=0.32, seed=8, z=5)
 for off in (-2.4, -1.1, 1.5):                                          # faixas
     hw = pr*np.sqrt(max(0.05, 1 - (off/pr)**2))
@@ -212,9 +245,8 @@ neb = arco(cx, cy, 5.5, 3.6, -10, 0, 2*np.pi, 80)
 bp.pontilhado(ax, neb, lambda x, y: 0.5*np.exp(-((x-cx)/3.2)**2 - ((y-cy)/2.1)**2), 1400,
               np.random.default_rng(30), cor=CEU, tam=0.14, z=4)
 # estrelas brilhantes do aglomerado (posições fixas, sem sobreposição) + membros fracos
-for (dx, dy) in [(-2.2, -1.0), (0.6, -1.8), (1.6, 0.2), (-0.6, 1.0), (3.4, -0.9), (-3.4, 1.4)]:
-    ax.add_patch(Circle((cx + dx, cy + dy), 0.42, facecolor=CEU, alpha=0.6, edgecolor="none", zorder=5))
-    ax.add_patch(Circle((cx + dx, cy + dy), 0.42, facecolor="none", edgecolor=TINTA, lw=0.4, zorder=6))
+for (dx, dy) in [(-2.0, -0.9), (1.4, -1.4), (0.2, 1.3)]:
+    estrela4(cx + dx, cy + dy, 0.95, CEU, 0.7, z=6)
 rng = np.random.default_rng(31)
 for k in range(18):
     r = abs(rng.normal(0, 2.4)); th = rng.uniform(0, 2*np.pi)
@@ -234,6 +266,14 @@ for k, xx in enumerate(np.linspace(x0, x0 + 52, 14)):
     ax.plot([xx, xx], [ys, ys - (1.3 if k % 4 == 0 else 0.7)], color=TINTA2, lw=0.45, alpha=0.7)
 
 fig.savefig(OUT / "header.svg", facecolor=FUNDO, metadata={"Date": None})
+# movimento: as estrelas de 4 pontas cintilam (CSS dentro do SVG funciona no <img> do GitHub)
+regras = "".join(f"#tw{i}{{animation:tw {3.6 + 0.5*(i % 4):.1f}s ease-in-out {0.7*i:.1f}s infinite}}"
+                 for i in range(N_TW))
+css = ("<style>@keyframes tw{0%,100%{opacity:1}50%{opacity:.3}}" + regras +
+       "@media (prefers-reduced-motion:reduce){[id^=tw]{animation:none!important}}</style>")
+svg = (OUT / "header.svg").read_text(encoding="utf-8")
+i = svg.index(">", svg.index("<svg")) + 1
+(OUT / "header.svg").write_text(svg[:i] + css + svg[i:], encoding="utf-8")
 if os.environ.get("PREVIEW"):
     fig.savefig(os.environ["PREVIEW"], dpi=400, facecolor=FUNDO)
 print("ok")

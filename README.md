@@ -43,29 +43,34 @@ Programming is part of the research itself, from processing survey catalogues to
 | [**nuvem-n-corpos**](https://github.com/pedroestevs/nuvem-n-corpos) | Direct N-body simulation of a rotating, self-gravitating cloud that collapses into a disk. Tested, MIT-licensed. |
 | [**hw-vir-fotometria**](https://github.com/pedroestevs/hw-vir-fotometria) | Differential photometry of the eclipsing binary HW Virginis, observed in V at the 0.6 m telescope of OPD/LNA. |
 
-## Stack
+## Programming
+
+Most of what I build is Python, from survey-scale catalogue pipelines to production web back ends, with TypeScript on the front end.
+
+<p align="center">
+  <img src="./assets/stack.svg" alt="Toolkit drawn as four constellations. Astronomy: Astropy, Astroquery, PyVO, Photutils, Lightkurve, PHOEBE, emcee, dynesty, healpy, ESO EDPS, dust_extinction. Data and ML: NumPy, SciPy, pandas, Polars, PyArrow, Dask, Numba, scikit-learn, XGBoost, Matplotlib, Jupyter. Web and apps: FastAPI, SQLAlchemy, Alembic, PostgreSQL, Next.js, React, TypeScript, Vite, D3, GSAP, Remotion, pywebview. Dev tools: Docker Compose, pytest, Playwright, Selenium, PyInstaller, Git, WSL, conda, PowerShell, LaTeX." width="100%">
+</p>
 
 <table>
   <tr>
     <td width="50%" valign="top">
-      <strong>Scientific computing</strong><br><br>
-      <code>Python</code> <code>NumPy</code> <code>SciPy</code> <code>Pandas</code><br>
-      <code>Astropy</code> <code>Matplotlib</code>
+      <strong>Research pipelines</strong><br><br>
+      Cross-matching and filtering multi-survey catalogues (Gaia, VVV/VIRAC2, GLIMPSE) with Polars, Dask and PyArrow; SED fitting and infrared-excess selection; light-curve and periodicity analysis; Bayesian inference with emcee and dynesty; eclipsing-binary modelling with PHOEBE; publication figures with a custom Matplotlib style.
     </td>
     <td width="50%" valign="top">
       <strong>Software</strong><br><br>
-      <code>FastAPI</code> <code>Next.js</code> <code>React</code> <code>Node.js</code><br>
-      <code>REST APIs</code> <code>OAuth 2.0</code> <code>JWT</code>
+      A full-stack web platform: FastAPI, SQLAlchemy/Alembic and PostgreSQL behind a Next.js/TypeScript front end, containerised with Docker Compose and tested with pytest and Playwright end-to-end.<br><br>
+      A Windows desktop automation app (pywebview, Selenium) packaged with PyInstaller.
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <strong>Data</strong><br><br>
-      <code>SQL</code> <code>PostgreSQL</code>
+      <strong>Science communication</strong><br><br>
+      An interactive planetarium presentation in React, Vite, D3 and GSAP, and a research video rendered in code with Remotion.
     </td>
     <td width="50%" valign="top">
-      <strong>Infrastructure</strong><br><br>
-      <code>Docker</code> <code>Docker Compose</code> <code>Git</code> <code>Linux</code> <code>WSL</code>
+      <strong>How I work</strong><br><br>
+      Reproducible environments (conda, WSL, pinned requirements), tests before results, version control for everything, and papers and posters in LaTeX.
     </td>
   </tr>
 </table>
